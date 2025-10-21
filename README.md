@@ -88,12 +88,12 @@ If you find this Printify Bulk Upload Tool helpful, consider supporting the deve
    pip install -r requirements.txt
    ```
 
-3. **Run the application**:
+4. **Run the application**:
    ```bash
    python app.py
    ```
 
-4. **Access the tool**:
+5. **Access the tool**:
    Open http://127.0.0.1:5000 in your web browser
 
 <div align="right">
@@ -340,6 +340,16 @@ ollama run llama3.2-vision:latest  # Recommended: Has better "influencer" abilit
 - Ensure you have at least one active store in Printify
 - Create or select a template product with your desired print specifications
 - Note your store ID and template product ID
+
+<img src="screencaps/step3.png" width="400" alt="Step 3 Screenshot">
+
+#### Step 4: Upload Images and Generate Products
+- Upload your images (PNG, JPG, JPEG, GIF formats supported)
+- Configure content generation settings (AI, filename, or template copy)
+- Generate product content and review before creating
+- Start bulk product creation and monitor progress
+
+<img src="screencaps/step4.png" width="400" alt="Step 4 Screenshot">
 
 ### Common Issues & Solutions
 
