@@ -1,4 +1,4 @@
-2<a id="top"></a>
+<a id="top"></a>
 <h1 style="color: #FF8C00;">🎬 BHTools: Bulk POD Product Uploader</h1>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
