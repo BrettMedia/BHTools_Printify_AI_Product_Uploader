@@ -52,6 +52,7 @@ If you find this Printify Bulk Upload Tool helpful, consider supporting the deve
 - [🎬 Uses & Applications](#uses)
 - [⚠️ Disclaimer](#disclaimer)
 - [📚 Guide & Troubleshooting](#guide)
+- [📸 Screenshots](#screenshots)
 - [📄 License](#license)
 
 <div align="right">
@@ -308,8 +309,6 @@ If you find this Printify Bulk Upload Tool helpful, consider supporting the deve
 4. Create a new API key
 5. Copy the key
 
-<img src="screencaps/step1.png" width="400" alt="Step 1 Screenshot">
-
 #### Step 2: Setup Your Environment
 ```bash
 # Create virtual environment (recommended)
@@ -334,22 +333,16 @@ ollama run llama3.2-vision:latest  # Recommended: Has better "influencer" abilit
 
 **Note:** The application does not automatically start or manage Ollama. You must run `ollama serve` in a separate terminal window before using Ollama features in the app. If Ollama is not running, requests will fail with connection errors.
 
-<img src="screencaps/step2.png" width="400" alt="Step 2 Screenshot">
-
 #### Step 3: Configure Your Store
 - Ensure you have at least one active store in Printify
 - Create or select a template product with your desired print specifications
 - Note your store ID and template product ID
-
-<img src="screencaps/step3.png" width="400" alt="Step 3 Screenshot">
 
 #### Step 4: Upload Images and Generate Products
 - Upload your images (PNG, JPG, JPEG, GIF formats supported)
 - Configure content generation settings (AI, filename, or template copy)
 - Generate product content and review before creating
 - Start bulk product creation and monitor progress
-
-<img src="screencaps/step4.png" width="400" alt="Step 4 Screenshot">
 
 ### Common Issues & Solutions
 
@@ -407,6 +400,25 @@ Check the console output for detailed error messages and progress updates.
 - **Issues**: Report bugs on the GitHub repository
 - **Feature Requests**: Submit ideas for new functionality
 - **Documentation**: Check this README for updates
+
+<div align="right">
+  <a href="#top">⬆️ Back to Top</a>
+</div>
+
+<a id="screenshots"></a>
+<h2 style="color: #FF8C00;">📸 Screenshots</h2>
+
+### Step 1: Select your image files
+<img src="screencaps/step1.png" width="400" alt="Step 1 Screenshot">
+
+### Step 2: Select your example product (and store)
+<img src="screencaps/step2.png" width="400" alt="Step 2 Screenshot">
+
+### Step 3: Define product-creation rules
+<img src="screencaps/step3.png" width="400" alt="Step 3 Screenshot">
+
+### Step 4: Create & Monitor
+<img src="screencaps/step4.png" width="400" alt="Step 4 Screenshot">
 
 <div align="right">
   <a href="#top">⬆️ Back to Top</a>
