@@ -1,4 +1,4 @@
-<a id="top"></a>
+2<a id="top"></a>
 <h1 style="color: #FF8C00;">🎬 BHTools: Bulk POD Product Uploader</h1>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -48,7 +48,6 @@ If you find this Printify Bulk Upload Tool helpful, consider supporting the deve
 - [⬇️ Installation](#installation)
 - [🎨 Features](#features)
 - [📖 Usage](#usage)
-- [🔧 API Endpoints](#api-endpoints)
 - [📋 Requirements](#requirements)
 - [🎬 Uses & Applications](#uses)
 - [⚠️ Disclaimer](#disclaimer)
@@ -161,27 +160,7 @@ If you find this Printify Bulk Upload Tool helpful, consider supporting the deve
   <a href="#top">⬆️ Back to Top</a>
 </div>
 
-<a id="api-endpoints"></a>
-<h2 style="color: #FF8C00;">🔧 API Endpoints</h2>
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/` | Main application page |
-| POST | `/api/set_keys` | Cache API keys in session |
-| GET | `/api/get_keys` | Check cached API key status |
-| GET | `/api/stores` | Fetch user's Printify stores |
-| GET | `/api/products` | Fetch products from selected store |
-| POST | `/api/upload` | Upload image files |
-| POST | `/api/create_products` | Initiate bulk product creation |
-| GET | `/api/progress` | Get real-time creation progress |
-| POST | `/api/generate_title` | Generate sample product title |
-| POST | `/api/generate_description` | Generate sample product description |
-| POST | `/api/generate_tags` | Generate sample product tags |
-| GET | `/api/product_details` | Get details of template product |
-
-<div align="right">
-  <a href="#top">⬆️ Back to Top</a>
-</div>
 
 <a id="requirements"></a>
 <h2 style="color: #FF8C00;">📋 Requirements</h2>
@@ -329,6 +308,8 @@ If you find this Printify Bulk Upload Tool helpful, consider supporting the deve
 4. Create a new API key
 5. Copy the key
 
+<img src="screencaps/step1.png" width="400" alt="Step 1 Screenshot">
+
 #### Step 2: Setup Your Environment
 ```bash
 # Create virtual environment (recommended)
@@ -352,6 +333,8 @@ ollama run llama3.2-vision:latest  # Recommended: Has better "influencer" abilit
 ```
 
 **Note:** The application does not automatically start or manage Ollama. You must run `ollama serve` in a separate terminal window before using Ollama features in the app. If Ollama is not running, requests will fail with connection errors.
+
+<img src="screencaps/step2.png" width="400" alt="Step 2 Screenshot">
 
 #### Step 3: Configure Your Store
 - Ensure you have at least one active store in Printify
@@ -405,14 +388,6 @@ ollama run llama3.2-vision:latest  # Recommended: Has better "influencer" abilit
 
 #### Custom AI Prompts
 The AI uses predefined prompts, but you can modify them in the code for custom behavior.
-
-#### Environment Variables
-For production deployment, consider using environment variables for API keys:
-```bash
-export PRINTIFY_API_KEY="your_key_here"
-export OPENAI_API_KEY="your_key_here"
-export GEMINI_API_KEY="your_key_here"
-```
 
 #### Logging
 Check the console output for detailed error messages and progress updates.
