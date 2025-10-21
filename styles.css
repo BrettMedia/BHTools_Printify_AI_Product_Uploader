@@ -1,0 +1,355 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #000000;
+    min-height: 100vh;
+    color: #333;
+}
+
+header {
+    background: linear-gradient(135deg, #FF8C00 0%, #FF6B35 100%);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+#saved-operations {
+    margin: 0.25rem 0;
+}
+
+#saved-operations button {
+    background: #ccc;
+    border: 2px solid #ccc;
+    color: #666;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    cursor: not-allowed;
+    margin: 0 0.25rem;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+#saved-operations button:hover {
+    background: #ccc;
+    color: #666;
+    transform: none;
+    box-shadow: none;
+}
+
+#help-toggle {
+    background: #FF8C00 !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.4rem 0.8rem !important;
+    border-radius: 20px !important;
+    cursor: pointer !important;
+    margin: 0 0.25rem !important;
+    transition: all 0.3s ease !important;
+    font-weight: bold !important;
+    font-size: 0.9rem !important;
+}
+
+#help-toggle:hover {
+    background: #FF6B35 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+}
+
+#support-small {
+    margin: 0.25rem 0 0 0;
+    text-align: center;
+}
+
+#support-small a {
+    margin: 0 0.125rem;
+}
+
+#support-small img {
+    height: 30px !important;
+}
+
+
+
+#help-section {
+    background: rgba(255,255,255,0.95);
+    color: #333;
+    margin: 1rem auto;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    max-width: 800px;
+    backdrop-filter: blur(10px);
+}
+
+#help-section h2, #help-section h3, #help-section h4 {
+    color: #FF8C00;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#help-section ul {
+    margin-left: 1rem;
+}
+
+#help-section li {
+    margin-bottom: 0.5rem;
+}
+
+#help-section button {
+    background: #FF8C00;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+#help-section button:hover {
+    background: #FF6B35;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    padding-top: 2rem;
+}
+
+section {
+    background: rgba(255,255,255,0.95);
+    margin: 0 auto 2rem auto;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+    width: 90%;
+    max-width: 800px;
+}
+
+section:first-of-type {
+    margin-top: 2rem;
+}
+
+
+
+h2 {
+    color: #FF8C00;
+    border-bottom: 3px solid #FF8C00;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+h3 {
+    color: #333;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"], input[type="number"], input[type="password"], textarea, select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #FF8C00;
+    box-shadow: 0 0 0 3px rgba(255,140,0,0.1);
+}
+
+button {
+    background: linear-gradient(135deg, #FF8C00 0%, #FF6B35 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #FF6B35 0%, #FF4500 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+#file-list {
+    margin-bottom: 1rem;
+}
+
+#file-list div {
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #FF8C00;
+    font-weight: bold;
+}
+
+#placement-modes {
+    margin-top: 1rem;
+}
+
+#placement-modes label {
+    display: inline-block;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    background: #f8f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#placement-modes label:hover {
+    background: #FF8C00;
+    color: white;
+}
+
+#ai-title-options {
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #FF8C00;
+}
+
+#progress {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#status {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FF8C00;
+    margin-bottom: 0.5rem;
+}
+
+#progress-text {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+#cancel {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+}
+
+#cancel:hover {
+    background: linear-gradient(135deg, #c82333 0%, #a02622 100%);
+}
+
+.collapse-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    color: #FF8C00;
+}
+
+.collapse-btn:hover {
+    color: #FF6B35;
+}
+
+#step1-content, #step2-content, #step3-content {
+    display: block;
+}
+
+footer {
+    background: linear-gradient(135deg, #FF8C00 0%, #FF6B35 100%);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}

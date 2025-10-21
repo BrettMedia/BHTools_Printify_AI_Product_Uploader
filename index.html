@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬BHTools Bulk POD Product Uploader</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>🎬BHTools Bulk POD Product Uploader</h1>
+        <div id="saved-operations">
+            <button id="help-toggle" title="Open the Help & Tips Guide">Help & Tips Guide</button>
+        </div>
+        <div id="support-small">
+            <a href="https://buymeacoffee.com/bhtools" target="_blank" title="Buy Me A Coffee">
+                <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 30px !important;width: 108.5px !important;"></a>
+            <a href="https://www.paypal.com/donate/?business=9HNGMQD4PZCR8&no_recurring=0&item_name=Huge+thanks+for+your+donation%21+You%27re+helping+shape+BHTools+and+making+space+for+more+art%2C+more+play%2C+and+more+innovation.&currency_code=USD" target="_blank" title="Support BH Tools with PayPal donations (one-time or recurring)">
+                <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" alt="PayPal" style="height: 30px !important;"></a>
+            <a href="https://www.patreon.com/cw/BHTools" target="_blank" title="Become a Patron">
+                <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" style="height: 25.5px !important;"></a>
+        </div>
+    </header>
+        <section id="step1">
+            <h2><button class="collapse-btn" data-target="step1-content">-</button> Step 1: Select your image files</h2>
+            <div id="step1-content">
+            <input type="file" id="image-files" multiple accept="image/*" title="Select multiple image files (PNG, JPG, JPEG, GIF) to upload for product creation.">
+            <div id="file-list"></div>
+            <div id="placement-modes">
+                <label><input type="radio" name="placement" value="stretch" checked title="Stretch images to fit the entire print area, which may distort aspect ratios."> Stretch Images To Fit Print Area(s)</label>
+                <label><input type="radio" name="placement" value="preserve" title="Keep original aspect ratios and center images in the print area without distortion."> Preserve Image Aspect Ratios & Center</label>
+                <label><input type="radio" name="placement" value="exact" title="Match the exact positioning and sizing of images from the example product."> Exactly Match Example Images</label>
+            </div>
+            </div>
+        </section>
+        <section id="step2">
+            <h2><button class="collapse-btn" data-target="step2-content">-</button> Step 2: Select your example product (and store)</h2>
+            <div id="step2-content">
+            <div>
+                <label for="api-key">Printify API Key:</label>
+                <input type="password" id="api-key" placeholder="Enter your Printify API Key" title="Your Printify API key (starts with 'sk-'). Required for accessing stores and products.">
+            </div>
+            <div>
+                <label for="openai-key">OpenAI API Key:</label>
+                <input type="password" id="openai-key" placeholder="Enter your OpenAI API Key" title="Your OpenAI API key. Required for AI-generated content.">
+                <div id="openai-status" style="margin-top: 5px; font-weight: bold;"></div>
+            </div>
+            <div>
+                <label for="gemini-key">Gemini API Key:</label>
+                <input type="password" id="gemini-key" placeholder="Enter your Gemini API Key" title="Your Gemini API key. Required for AI-generated content.">
+                <div id="gemini-status" style="margin-top: 5px; font-weight: bold;"></div>
+            </div>
+            <div>
+                <label for="ai-provider">AI Provider:</label>
+                <select id="ai-provider" title="Select the AI provider for generating content.">
+                    <option value="openai">OpenAI</option>
+                    <option value="gemini">Gemini</option>
+                    <option value="ollama">Ollama</option>
+                </select>
+            </div>
+            <div id="ollama-options" style="display:none;">
+                <label for="ollama-model">Ollama Model:</label>
+                <select id="ollama-model" title="Select the Ollama model to use.">
+                    <option value="">Select Ollama Model</option>
+                </select>
+                <div id="ollama-status" style="margin-top: 5px; font-weight: bold;"></div>
+            </div>
+            <div id="api-status" style="margin-top: 10px; font-weight: bold;"></div>
+            <div>
+                <label for="store-select">Create Products For This Store:</label>
+                <select id="store-select" title="Select the Printify store where new products will be created.">
+                </select>
+            </div>
+            <div>
+                <label for="product-select">Example Product To Use:</label>
+                <select id="product-select" title="Choose an existing product to copy settings (variants, print provider, blueprint) for new products.">
+                </select>
+            </div>
+        </section>
+        <section id="step3">
+            <h2><button class="collapse-btn" data-target="step3-content">-</button> Step 3: Define product-creation rules</h2>
+            <div id="step3-content">
+            <div id="title-rules">
+                <h3>Product Titles</h3>
+                <label><input type="radio" name="title-source" value="filename" checked title="Use the filename of each image as the product title (e.g., 'cool_design.png' becomes 'cool_design')."> Use Image Filenames</label>
+                <label><input type="radio" name="title-source" value="ai" title="Generate titles using AI based on the image content. Choose simple or compound mode below."> Generate Using AI</label>
+                <div id="ai-title-options" style="display:none;">
+                    <label><input type="radio" name="ai-title-mode" value="simple" checked title="Generate a single, concise title phrase."> Simple</label>
+                    <label><input type="radio" name="ai-title-mode" value="compound" title="Generate a title with multiple parts or segments for more detail."> Compound</label>
+                    <input type="number" id="compound-segments" placeholder="Number of segments" min="1" value="1" title="For compound mode: How many segments (parts) to include in the title.">
+                </div>
+                <input type="text" id="custom-title-text" placeholder="Custom Text In Each Title" title="Optional text to append or include in every title.">
+                <input type="text" id="title-template" placeholder="Title Template" value="[AI-Generated Title] [Custom Text]" title="Template for combining AI-generated title with custom text. Use [AI-Generated Title] and [Custom Text] placeholders.">
+            </div>
+            <div id="description-rules">
+                <h3>Product Descriptions</h3>
+                <label><input type="radio" name="desc-source" value="copy" checked title="Copy the description from the selected example product to all new products."> Copy From Example Product</label>
+                <label><input type="radio" name="desc-source" value="ai" title="Generate unique descriptions using AI based on each image."> Generate Using AI</label>
+                <input type="number" id="desc-paragraphs" placeholder="Number of paragraphs" min="1" value="1" title="How many paragraphs to generate for AI descriptions.">
+                <input type="text" id="influencer-phrases" placeholder="Influencer Phrases (optional)" title="Optional words or phrases to influence AI descriptions, e.g., 'from a girl's POV' or 'sales pitch'.">
+                <textarea id="custom-html" placeholder="Custom HTML boilerplate" title="Optional HTML content to append to every AI-generated description."></textarea>
+            </div>
+            <div id="tag-rules">
+                <h3>Product Tags</h3>
+                <label><input type="radio" name="tag-source" value="copy" checked title="Copy tags from the selected example product to all new products."> Copy From Example Product</label>
+                <label><input type="radio" name="tag-source" value="ai" title="Generate relevant tags using AI based on each image content."> Generate Using AI</label>
+                <input type="number" id="max-ai-tags" placeholder="Max # of AI-Generated Tags" min="1" value="10" title="Maximum number of tags to generate per product when using AI.">
+                <input type="text" id="evergreen-tags" placeholder="Evergreen tags (comma-separated)" title="Tags to include on every product, regardless of AI generation (e.g., 'tshirt, apparel, clothing').">
+            </div>
+            </div>
+        </section>
+        <section id="create-monitor">
+            <h2><button class="collapse-btn" data-target="create-monitor-content">-</button> Create & Monitor</h2>
+            <div id="create-monitor-content">
+            <button id="create-products" title="Start the bulk product creation process based on your selected images and rules. This may take several minutes depending on the number of images and AI generation settings.">Create My Products</button>
+            <div id="progress">
+                <p id="status">Status: Idle</p>
+                <p id="progress-text">Progress: 0/0</p>
+                <p id="progress-message"></p>
+                <button id="cancel" disabled title="Stop the current product creation process. Any partially created products will remain in your Printify store.">Cancel Current Operation</button>
+            </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-help" class="close">&times;</span>
+            <h2>Help & Tips - Full Guide</h2>
+            <div style="font-size: 14px;">
+            <p>This tool helps you create many Print-on-Demand (POD) products at once using your images. It uploads them to Printify and generates titles, descriptions, and tags automatically or by copying from an example product.</p>
+
+            <h3>Step 1: Select Your Image Files</h3>
+            <p>Click the file picker to choose multiple images (PNG, JPG, JPEG, GIF). These will become the designs for your products. The tool shows a list of selected files below.</p>
+            <p><strong>Example:</strong> Select 5 PNG files of artwork (e.g., "sunset.png", "mountain.png", "ocean.png", "forest.png", "city.png"). The file list will display them as "5 files selected".</p>
+            <p><strong>Placement Modes:</strong> Choose how images are placed on products:</p>
+            <ul>
+                <li><strong>Stretch to Fit:</strong> Makes the image fill the entire print area, but might distort it.</li>
+                <li><strong>Preserve Aspect Ratio:</strong> Keeps the image's original shape and centers it without stretching.</li>
+                <li><strong>Match Example:</strong> Copies the exact placement from your chosen example product.</li>
+            </ul>
+            <p><strong>Example:</strong> For a square image on a t-shirt, select "Preserve Aspect Ratio" to avoid distortion, or "Stretch to Fit" for a full-coverage design.</p>
+
+            <h3>Step 2: Set Up Your Accounts and Example</h3>
+            <p><strong>API Keys:</strong> You need keys to connect to Printify and AI services.</p>
+            <ul>
+                <li><strong>Printify API Key:</strong> Get this from your Printify account settings (starts with 'sk-'). It's required to access your stores and products.</li>
+                <li><strong>OpenAI or Gemini API Key:</strong> For AI features. OpenAI uses GPT, Gemini uses Google's AI. Enter the key for the provider you choose.</li>
+                <li><strong>Ollama:</strong> No API key needed. Runs locally on your machine. Requires installing Ollama and a vision-capable model.</li>
+            </ul>
+            <p><strong>Example:</strong> Enter "sk-1234567890abcdef" for Printify, and "sk-proj-ABC123..." for OpenAI if using AI features. For Ollama, just select it as the provider.</p>
+            <p><strong>AI Provider:</strong> Select OpenAI, Gemini, or Ollama from the dropdown. This decides which AI generates content.</p>
+            <p><strong>Example:</strong> Choose "OpenAI" if you have credits there, "Gemini" for Google's free tier, or "Ollama" for local, cost-free AI processing.</p>
+            <p><strong>Store and Product:</strong> After entering the Printify key, select a store from the dropdown. Then pick an example product from that store. New products will copy settings like variants, print provider, and blueprint from this example.</p>
+            <p><strong>Example:</strong> Select "My Art Store" from stores, then choose "Classic Cotton T-Shirt" as the example product to copy its print settings.</p>
+
+            <h3>Step 3: Define Rules for Content</h3>
+            <p>Set how titles, descriptions, and tags are created for each product.</p>
+
+            <h4>Product Titles</h4>
+            <ul>
+                <li><strong>Use Image Filenames:</strong> The product name will be the image file name (e.g., 'cool_design.png' becomes 'cool_design').</li>
+                <li><strong>Generate Using AI:</strong> AI creates a title based on the image. Choose:</li>
+                <ul>
+                    <li><strong>Simple:</strong> One short phrase.</li>
+                    <li><strong>Compound:</strong> Multiple parts, set the number of segments.</li>
+                </ul>
+                <li><strong>Custom Text:</strong> Add your own text to every title.</li>
+                <li><strong>Title Template:</strong> Combine AI title and custom text using placeholders like "[AI-Generated Title] [Custom Text]".</li>
+            </ul>
+            <p><strong>Example:</strong> For an image of a sunset, AI might generate "Golden Hour Serenity". With custom text "Art Print" and template "[AI-Generated Title] [Custom Text]", the final title becomes "Golden Hour Serenity Art Print".</p>
+
+            <h4>Product Descriptions</h4>
+            <ul>
+                <li><strong>Copy From Example:</strong> Use the description from your selected example product.</li>
+                <li><strong>Generate Using AI:</strong> AI writes a description based on the image. Set number of paragraphs.</li>
+                <li><strong>Custom HTML:</strong> Add extra HTML text to every description (e.g., for links or formatting). AI-generated descriptions are automatically formatted with proper HTML tags (markdown like *italics* becomes <em>italics</em>).</li>
+            </ul>
+            <p><strong>Example:</strong> For a mountain image, AI might generate: "This majestic mountain landscape captures the raw beauty of nature. Perfect for nature lovers and outdoor enthusiasts."</p>
+
+            <h4>Product Tags</h4>
+            <ul>
+                <li><strong>Copy From Example:</strong> Use tags from the example product.</li>
+                <li><strong>Generate Using AI:</strong> AI creates relevant tags based on the image. Set max number of tags.</li>
+                <li><strong>Evergreen Tags:</strong> Tags added to every product, like "tshirt, apparel" (comma-separated).</li>
+            </ul>
+            <p><strong>Example:</strong> For a sunset image, AI might generate tags like "sunset, landscape, nature, sky, golden hour". With evergreen tags "tshirt, apparel", the final tags become "sunset, landscape, nature, sky, golden hour, tshirt, apparel".</p>
+
+            <h3>Create & Monitor Products</h3>
+            <p>Click "Create My Products" to start. The tool uploads images, generates content, and creates products in Printify. Watch the progress bar. You can cancel if needed.</p>
+            <p><strong>Alerts:</strong> Browser alerts will appear during the process to show status updates, confirmations, and any errors. Keep the page open and don't navigate away during creation.</p>
+
+            <h3>Tips</h3>
+            <ul>
+                <li>Make sure API keys are correct and have permissions.</li>
+                <li>AI generation costs credits from your provider (except Ollama, which is free and local).</li>
+                <li>Test with 1-2 images first to check results.</li>
+                <li>Save your settings for reuse.</li>
+            </ul>
+
+            <h3>Examples</h3>
+            <ul>
+                <li><strong>Title Template:</strong> "[Cool Design] [My Text]" with AI "Cool Design" and custom "My T-Shirt" makes "Cool Design My T-Shirt".</li>
+                <li><strong>Evergreen Tags:</strong> "tshirt, clothing, apparel" adds these to all products.</li>
+                <li><strong>Custom HTML:</strong> <code><p>This is a great product!</p></code> adds that paragraph to descriptions. You can use HTML tags like <code><b>bold</b></code> for bold, <code><i>italics</i></code> for italics, <code><br></code> for line breaks, or <code><a href="url">link</a></code> for links. AI-generated descriptions are automatically formatted with proper HTML tags (markdown like *italics* becomes <em>italics</em>).</li>
+            </ul>
+
+            <h3>Support the Project</h3>
+            <p>If you find this tool helpful, consider supporting its development:</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="https://buymeacoffee.com/bhtools" target="_blank" title="Buy Me A Coffee">
+                    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 30px !important;width: 108.5px !important;">
+                </a>
+                <a href="https://www.paypal.com/donate/?business=9HNGMQD4PZCR8&no_recurring=0&item_name=Huge+thanks+for+your+donation%21+You%27re+helping+shape+BHTools+and+making+space+for+more+art%2C+more+play%2C+and+more+innovation.&currency_code=USD" target="_blank" title="Support BH Tools with PayPal donations (one-time or recurring)">
+                    <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" alt="PayPal" style="height: 30px !important;">
+                </a>
+                <a href="https://www.patreon.com/cw/BHTools" target="_blank" title="Become a Patron">
+                    <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" style="height: 25.5px !important;">
+                </a>
+            </div>
+
+            <h3>Disclaimer</h3>
+            <p style="font-size: 12px;"><strong>Important Legal & Usage Notes:</strong></p>
+            <p style="font-size: 12px;"><strong>API Usage & Costs:</strong> This tool integrates with third-party APIs (Printify, OpenAI, Google Gemini). You are responsible for all API usage costs and rate limits. Ensure compliance with each service's Terms of Service. Monitor your API usage to avoid unexpected charges.</p>
+            <p style="font-size: 12px;"><strong>Content Generation:</strong> AI-generated content is created using external services and may not always be perfect. Review and edit generated titles, descriptions, and tags before publishing. The tool does not guarantee SEO performance or sales results. Generated content should be used as a starting point, not final copy.</p>
+            <p style="font-size: 12px;"><strong>Printify Integration:</strong> Products created through this tool follow Printify's standard processes. You maintain full ownership and control of created products. Be aware of Printify's product creation limits and guidelines. Some product types may have additional requirements or restrictions.</p>
+            <p style="font-size: 12px;"><strong>Data Privacy:</strong> Images are temporarily stored locally during processing. API keys are managed in session and do not persist across app restarts. No user data is collected or transmitted to third parties beyond API calls. Use strong, unique API keys and keep them secure.</p>
+            <p style="font-size: 12px;"><strong>No Warranty:</strong> This tool is provided "as-is" without warranty of any kind. The developers are not responsible for any damages or losses. Use at your own risk and test thoroughly before production use.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 20px; font-size: 14px; border-top: 1px solid #ccc; margin-top: 20px;">
+        <p>Support BHTools: <a href="https://buymeacoffee.com/bhtools" target="_blank">Buy Me A Coffee</a> | <a href="https://www.paypal.com/donate/?business=9HNGMQD4PZCR8&no_recurring=0&item_name=Huge+thanks+for+your+donation%21+You%27re+helping+shape+BHTools+and+making+space+for+more+art%2C+more+play%2C+and+more+innovation.&currency_code=USD" target="_blank">PayPal</a> | <a href="https://www.patreon.com/cw/BHTools" target="_blank">Patreon</a></p>
+        <p>&copy; 2025 BHTools. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
